@@ -1,0 +1,26 @@
+import java.util.*;
+import java.nio.file.*;
+
+class WaterMonitor {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double[] u = {sc.nextDouble(), sc.nextDouble(), sc.nextDouble()};
+        double total = u[0] + u[1] + u[2];
+
+        String status = total > 500 ? "High" : "Normal";
+        Arrays.sort(u);
+
+        System.out.println("Total: " + total + " L");
+        System.out.println("Status: " + status);
+        System.out.println("Highest: " + u[2] + " L");
+
+        try {
+            Files.writeString(Path.of("water.txt"), "Total: " + total);
+        } catch (Exception e) {
+            System.out.println("File Error");
+        }
+
+        sc.close();
+    }
+}
